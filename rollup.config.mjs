@@ -1,9 +1,8 @@
-import ejs from 'ejs';
-import fs from 'fs';
 import { glob } from 'glob';
 import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
+import { templateHandler } from './template-handler.mjs';
 
 let plugins = [
   {
@@ -18,15 +17,7 @@ let plugins = [
         ignore: baseDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach(ejsPath => {
-        const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
-        const compiled = ejs.compile(template, { filename: ejsPath });
-
-        const distPath = distDir + path.relative(baseDir, ejsPath).replaceAll('.ejs', '.html');
-        if (! fs.existsSync(path.dirname(distPath))) {
-          fs.mkdirSync(path.dirname(distPath), { recursive: true });
-        }
-
-        fs.writeFileSync(distPath, compiled());
+        templateHandler(baseDir, distDir, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));

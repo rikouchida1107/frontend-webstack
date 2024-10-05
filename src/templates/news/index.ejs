@@ -1,6 +1,13 @@
 <html lang="ja">
 <head>
-    <%- include('../includes/_header', { pageName: 'DETAIL | NEWS' }) %>
+    <%- include('../includes/_header', { pageName: 'NEWS' }) %>
 </head>
-<body>NEWS/DETAIL</body>
+<body>
+<h2>NEWS</h2>
+<ul>
+    <% entries.forEach(function(entry) { %>
+        <li><%= entry.id %>: <%= entry.title %></li>
+    <% }); %>
+</ul>
+</body>
 </html>

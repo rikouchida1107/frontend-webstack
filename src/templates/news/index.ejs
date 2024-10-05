@@ -1,13 +1,14 @@
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-    <%- include('../includes/_header', { pageName: 'NEWS' }) %>
+<%- include('../includes/_header', { pageName: 'NEWS' }) -%>
 </head>
 <body>
 <h2>NEWS</h2>
 <ul>
-    <% entries.forEach(function(entry) { %>
-        <li><%= entry.id %>: <%= entry.title %></li>
-    <% }); %>
+    <%_ entries.forEach(function(entry) { -%>
+        <li><a href="<%- entry.id %>.html"><%= entry.title %></a></li>
+    <%_ }); -%>
 </ul>
 </body>
 </html>

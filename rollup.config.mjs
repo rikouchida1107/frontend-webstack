@@ -9,7 +9,6 @@ let plugins = [
     name: 'ejs-compiler',
     version: '1.0.0',
     buildStart: function () {
-      console.log('Build Start');
       const baseDir = 'src/templates/';
       const distDir = 'dist/';
 

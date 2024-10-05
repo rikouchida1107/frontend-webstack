@@ -8,15 +8,17 @@ import serve from 'rollup-plugin-serve';
 let plugins = [
   {
     name: 'ejs-compiler',
-    async buildStart () {
+    version: '1.0.0',
+    buildStart: function () {
+      console.log('Build Start');
       const baseDir = 'src/templates/';
       const distDir = 'dist/';
 
-      const ejsPaths = await glob(baseDir + '**/*.ejs', {
-        ignore: baseDir + 'includes/**/*.ejs'
+      const ejsPaths = glob.sync(baseDir + '**/*.ejs', {
+        ignore: baseDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach(ejsPath => {
-        const template = fs.readFileSync(ejsPath, 'UTF-8');
+        const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
         const compiled = ejs.compile(template, { filename: ejsPath });
 
         const distPath = distDir + path.relative(baseDir, ejsPath).replaceAll('.ejs', '.html');
@@ -25,6 +27,10 @@ let plugins = [
         }
 
         fs.writeFileSync(distPath, compiled());
+
+        if (process.env.ROLLUP_WATCH) {
+          this.addWatchFile(path.resolve('./', ejsPath));
+        }
       });
     },
   },
@@ -44,7 +50,7 @@ if (process.env.ROLLUP_WATCH) {
     chokidar: { usePolling: true },
     clearScreen: false,
     exclude: 'node_modules/**',
-    include: 'src/**',
+    include: 'src/**/*.*',
     // skipWrite: false,
   };
 
@@ -59,12 +65,12 @@ if (process.env.ROLLUP_WATCH) {
         'Cache-Control': 'no-cache',
       },
       onListening: function (server) {
-        const address = server.address()
-        const host = address.address === '::' ? 'localhost' : address.address
+        const address = server.address();
+        const host = address.address === '::' ? 'localhost' : address.address;
         // by using a bound function, we can access options as `this`
-        const protocol = this.https ? 'https' : 'http'
-        console.log(`Server listening at ${protocol}://${host}:${address.port}/`)
-      }
+        const protocol = this.https ? 'https' : 'http';
+        console.log(`Server listening at ${protocol}://${host}:${address.port}/`);
+      },
     }),
   ]);
 }

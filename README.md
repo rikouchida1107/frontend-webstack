@@ -1,4 +1,4 @@
-# Standard webs tack
+# Frontend web stack
 
 ## Get started
 

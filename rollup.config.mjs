@@ -36,7 +36,18 @@ let plugins = [
   }),
 ];
 
+let watchOptions = false;
+
 if (process.env.ROLLUP_WATCH) {
+  watchOptions = {
+    // buildDelay: 0,
+    chokidar: { usePolling: true },
+    clearScreen: false,
+    exclude: 'node_modules/**',
+    include: 'src/**',
+    // skipWrite: false,
+  };
+
   plugins.push([
     serve({
       open: true,
@@ -67,18 +78,6 @@ export default {
       format: 'esm',
     },
   ],
-  watch: {
-    // buildDelay: 0,
-    chokidar: { usePolling: true },
-    clearScreen: false,
-    exclude: [
-      'node_modules/**',
-    ],
-    include: [
-      'src/styles/**.*',
-      'src/templates/**.*',
-    ],
-    // skipWrite: false,
-  },
+  watch: watchOptions,
   plugins: plugins,
 };

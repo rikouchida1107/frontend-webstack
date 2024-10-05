@@ -1,14 +1,11 @@
 {
-  "name": "standard-webstack",
+  "name": "frontend-webstack",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "build": "rollup --config",
     "watch": "rollup --config --watch"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "engines": {
     "node": "22.5.1"
   },

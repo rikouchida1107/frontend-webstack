@@ -29,6 +29,6 @@ rollup --config
 ## How to development
 
 ```bash
-rollup --config --watch
+rollup --config --watch # default port 3000
 # npm run watch
 ```

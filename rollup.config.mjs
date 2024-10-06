@@ -47,8 +47,8 @@ if (process.env.ROLLUP_WATCH) {
   plugins.push([
     serve({
       open: true,
-      contentBase: 'dist',
-      port: 3000,
+      contentBase: DIST_DIR,
+      port: process.env.PORT ?? 3000,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Pragma': 'no-cache',

@@ -27,7 +27,7 @@ const contexts = {
   },
 };
 
-function templateHandler (
+function templateCompiler (
   /** @type {string} */ baseDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
@@ -61,5 +61,5 @@ function templateHandler (
 }
 
 export {
-  templateHandler,
+  templateCompiler,
 };

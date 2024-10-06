@@ -5,16 +5,30 @@
 ```bash
 npm install ejs glob rollup
 npm install rollup-plugin-sass rollup-plugin-serve
+
+node -v > .node-version
+
+mkdir -p src/{styles,template/includes}
+touch src/styles/main.scss
+touch src/templates/index.ejs
+touch src/templates/_header.ejs
+
+cp -ap THIS_PROJECT/.gitignore .
+cp -ap THIS_PROJECT/main.js .
+cp -ap THIS_PROJECT/rollup.config.mjs .
+cp -ap THIS_PROJECT/template-handler.mjs .
 ```
 
 ## How to build
 
 ```bash
-npm run build
+rollup --config
+# OR npm run build
 ```
 
 ## How to development
 
 ```bash
-npm run watch
+rollup --config --watch
+# npm run watch
 ```

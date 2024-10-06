@@ -28,14 +28,14 @@ const contexts = {
 };
 
 function templateCompiler (
-  /** @type {string} */ baseDir,
+  /** @type {string} */ templateDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
 ) {
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath });
 
-  const distPath = distDir + path.relative(baseDir, ejsPath).replaceAll('.ejs', '.html');
+  const distPath = distDir + path.relative(templateDir, ejsPath).replaceAll('.ejs', '.html');
   if (! fs.existsSync(path.dirname(distPath))) {
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }

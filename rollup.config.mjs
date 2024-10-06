@@ -4,19 +4,21 @@ import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
 import { templateCompiler } from './template-compiler.mjs';
 
-let plugins = [
+const DIST_DIR = 'dist/';
+const SOURCE_DIR = 'src/';
+
+const plugins = [
   {
     name: 'ejs-compiler',
     version: '1.0.0',
     buildStart: function () {
-      const baseDir = 'src/templates/';
-      const distDir = 'dist/';
+      const templateDir = SOURCE_DIR + 'templates/';
 
-      const ejsPaths = glob.sync(baseDir + '**/*.ejs', {
-        ignore: baseDir + 'includes/**/*.ejs',
+      const ejsPaths = glob.sync(templateDir + '**/*.ejs', {
+        ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach(ejsPath => {
-        templateCompiler(baseDir, distDir, ejsPath);
+        templateCompiler(templateDir, DIST_DIR, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));
@@ -25,10 +27,8 @@ let plugins = [
     },
   },
   sass({
-    output: 'dist/css/style.css',
-    options: {
-      outputStyle: 'compressed',
-    },
+    output: DIST_DIR + 'css/style.css',
+    options: { outputStyle: 'compressed' },
   }),
 ];
 
@@ -40,7 +40,7 @@ if (process.env.ROLLUP_WATCH) {
     chokidar: { usePolling: true },
     clearScreen: false,
     exclude: 'node_modules/**',
-    include: 'src/**/*.*',
+    include: SOURCE_DIR + '**/*.*',
     // skipWrite: false,
   };
 
@@ -70,7 +70,7 @@ export default {
   context: 'window',
   output: [
     {
-      file: 'dist/js/index.js',
+      file: DIST_DIR + 'js/index.js',
       format: 'esm',
     },
   ],

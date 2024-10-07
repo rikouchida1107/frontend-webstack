@@ -8,8 +8,6 @@ function templateCompiler (
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
 ) {
-  const env = process.env.ENV === undefined ? {} : (envVars[process.env.ENV] ?? {});
-
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
 
@@ -18,6 +16,7 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
+  const env = process.env.ENV === undefined ? {} : (envVars[process.env.ENV] ?? {});
   let data = Object.assign({ envVars: env }, { vars: globalVars });
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {

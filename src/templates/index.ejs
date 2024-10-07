@@ -1,13 +1,23 @@
 <%_ const path = '.'; _%>
+<%_ const headType = 'website'; _%>
+<%_ const pageId = 'home'; _%>
+<%_ const pageTitle = ''; _%>
+<%_ const pageType = 'top'; _%>
+<%- include( path + '/includes/_const.ejs'); %>
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <%- include('includes/_header', { pageName: 'TOP', path: path }) %>
+    <%- include('includes/_head', { pageName: 'TOP', path: path, pageId: pageId }) %>
 </head>
 <body>
+    <%- include('includes/_header', { pageName: 'TOP', path: path, pageId: pageId }) %>
+    <%- include(path + '/includes/_sp-nav.ejs',{ path: path, pageId: pageId, pageTitle: pageTitle}); %>
 <h2>INDEX</h2>
 <p>HELLO :)</p>
 <a href="news/">NEWS</a>
+
+<%- include(path + '/includes/_footer.ejs',{ path: path, pageId: pageId, pageTitle: pageTitle}); %>
+
 </body>
 </html>

@@ -1,4 +1,11 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title><%= pageName %> | SITE</title>
-<link rel="stylesheet" href="<%= path %>/css/style.css" />
+<header class="l-header">
+    Header
+    <h1>title</h1>
+    <% if(pageId === 'home') { %>
+        <!-- トップページでだしたいナビ -->
+        <p>topのみ</p>
+        <% } else { %>
+        <!-- トップページ以外でだしたいナビ -->
+        <p>top以外</p>
+    <% } %>
+</header>

@@ -9,7 +9,7 @@ function templateCompiler (
   /** @type {string} */ ejsPath,
 ) {
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
-  const compiler = ejs.compile(template, { filename: ejsPath });
+  const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
 
   const distPath = distDir + path.relative(templateDir, ejsPath).replaceAll('.ejs', '.html');
   if (! fs.existsSync(path.dirname(distPath))) {

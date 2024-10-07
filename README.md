@@ -25,6 +25,7 @@ cp -ap THIS_PROJECT/template-contexts.mjs .
 
 ```bash
 rollup --config
+# OR ENV=prod rollup --config # use env
 # OR npm run build
 ```
 

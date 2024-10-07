@@ -1,13 +1,15 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
-import { globalVars, templateContexts } from './template-contexts.mjs';
+import { envVars, globalVars, templateContexts } from './template-contexts.mjs';
 
 function templateCompiler (
   /** @type {string} */ templateDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
 ) {
+  const env = process.env.ENV === undefined ? {} : (envVars[process.env.ENV] ?? {});
+
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
 
@@ -16,13 +18,15 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
+  let data = Object.assign({ envVars: env }, { vars: globalVars });
+
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
     pages.forEach(page => {
       const pagePath = distPath.replace(path.basename(distPath), page.slug);
       fs.writeFileSync(
         pagePath,
-        compiler(Object.assign(globalVars, page.data)),
+        compiler(Object.assign(data, page.data)),
       );
       info('created ' + pagePath);
     });
@@ -30,7 +34,6 @@ function templateCompiler (
     return;
   }
 
-  let data = globalVars;
   if (ejsPath in templateContexts && 'data' in templateContexts[ejsPath]) {
     data = Object.assign(data, templateContexts[ejsPath].data);
   }

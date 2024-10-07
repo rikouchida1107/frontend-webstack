@@ -1,13 +1,19 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
-import { envVars, globalVars, templateContexts } from './template-contexts.mjs';
+import { globalVars, templateContexts } from './template-contexts.mjs';
 
-function templateCompiler (
+async function templateCompiler (
   /** @type {string} */ templateDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
 ) {
+  let envVars = {};
+  if (process.env.ENV !== undefined) {
+    const { vars } = await import('./env.' + process.env.ENV + '.mjs');
+    envVars = vars;
+  }
+
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
 
@@ -16,8 +22,7 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
-  const env = process.env.ENV === undefined ? {} : (envVars[process.env.ENV] ?? {});
-  let data = Object.assign({ envVars: env }, { vars: globalVars });
+  let data = Object.assign({ envVars: envVars }, { vars: globalVars });
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;

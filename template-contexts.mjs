@@ -1,15 +1,3 @@
-const envVars = {
-  // 'prod': {
-  //   apiKey: 'prod-api-key',
-  // },
-  // 'stage': {
-  //   apiKey: 'stage-api-key',
-  // },
-  // 'local': {
-  //   apiKey: 'local-api-key',
-  // },
-};
-
 const globalVars = {
   websiteName: 'EXAMPLE SITE',
 };
@@ -40,7 +28,6 @@ const templateContexts = {
 };
 
 export {
-  envVars,
   globalVars,
   templateContexts,
 };

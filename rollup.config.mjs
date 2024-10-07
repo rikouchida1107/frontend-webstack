@@ -17,8 +17,8 @@ const plugins = [
       const ejsPaths = glob.sync(templateDir + '**/*.ejs', {
         ignore: templateDir + 'includes/**/*.ejs',
       });
-      ejsPaths.forEach(ejsPath => {
-        templateCompiler(templateDir, DIST_DIR, ejsPath);
+      ejsPaths.forEach(async (ejsPath) => {
+        await templateCompiler(templateDir, DIST_DIR, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));

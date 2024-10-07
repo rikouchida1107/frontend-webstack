@@ -3,6 +3,7 @@ import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
 import { templateCompiler } from './template-compiler.mjs';
+import { globalVars } from './global.mjs';
 
 const DIST_DIR = 'dist/';
 const SOURCE_DIR = 'src/';
@@ -24,7 +25,7 @@ const plugins = [
         ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach((ejsPath) => {
-        templateCompiler(envVars, templateDir, DIST_DIR, ejsPath);
+        templateCompiler(envVars, globalVars, templateDir, DIST_DIR, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));

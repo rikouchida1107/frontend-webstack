@@ -1,10 +1,11 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
-import { globalVars, templateContexts } from './template-contexts.mjs';
+import { templateContexts } from './template-contexts.mjs';
 
 function templateCompiler (
   /** @type {Object} */ envVars,
+  /** @type {Object} */ globalVars,
   /** @type {string} */ templateDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
@@ -17,7 +18,7 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
-  let data = Object.assign({ envVars: envVars }, { vars: globalVars });
+  let data = Object.assign({ envVars: envVars }, { globalVars: globalVars });
 
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;

@@ -1,3 +1,9 @@
+const globalVars = {
+  vars: {
+    websiteName: 'EXAMPLE SITE',
+  },
+};
+
 const templateContexts = {
   'src/templates/news/index.ejs': {
     data: {
@@ -24,5 +30,6 @@ const templateContexts = {
 };
 
 export {
+  globalVars,
   templateContexts,
 };

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
-import { templateContexts } from './template-contexts.mjs';
+import { globalVars, templateContexts } from './template-contexts.mjs';
 
 function templateCompiler (
   /** @type {string} */ templateDir,
@@ -22,7 +22,7 @@ function templateCompiler (
       const pagePath = distPath.replace(path.basename(distPath), page.slug);
       fs.writeFileSync(
         pagePath,
-        compiler(page.data)
+        compiler(Object.assign(globalVars, page.data)),
       );
       info('created ' + pagePath);
     });
@@ -30,9 +30,9 @@ function templateCompiler (
     return;
   }
 
-  let data = {};
+  let data = globalVars;
   if (ejsPath in templateContexts && 'data' in templateContexts[ejsPath]) {
-    data = templateContexts[ejsPath].data;
+    data = Object.assign(data, templateContexts[ejsPath].data);
   }
 
   fs.writeFileSync(distPath, compiler(data));

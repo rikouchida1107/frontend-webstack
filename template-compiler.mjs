@@ -1,31 +1,7 @@
 import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
-
-const contexts = {
-  'src/templates/news/index.ejs': {
-    data: {
-      entries: [
-        { id: 1, title: 'HELLO :)' },
-        { id: 2, title: 'HELLO :-D' },
-      ],
-    },
-  },
-  'src/templates/news/detail.ejs': {
-    pages: [
-      {
-        slug: '1.html', data: {
-          id: 1, title: 'HELLO :)',
-        },
-      },
-      {
-        slug: '2.html', data: {
-          id: 2, title: 'HELLO :-D',
-        },
-      },
-    ],
-  },
-};
+import { templateContexts } from './template-contexts.mjs';
 
 function templateCompiler (
   /** @type {string} */ templateDir,
@@ -40,8 +16,8 @@ function templateCompiler (
     fs.mkdirSync(path.dirname(distPath), { recursive: true });
   }
 
-  if (ejsPath in contexts && 'pages' in contexts[ejsPath]) {
-    const pages = contexts[ejsPath].pages;
+  if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
+    const pages = templateContexts[ejsPath].pages;
     pages.forEach(page => {
       fs.writeFileSync(
         distPath.replace(path.basename(distPath), page.slug),
@@ -53,8 +29,8 @@ function templateCompiler (
   }
 
   let data = {};
-  if (ejsPath in contexts && 'data' in contexts[ejsPath]) {
-    data = contexts[ejsPath].data;
+  if (ejsPath in templateContexts && 'data' in templateContexts[ejsPath]) {
+    data = templateContexts[ejsPath].data;
   }
 
   fs.writeFileSync(distPath, compiler(data));

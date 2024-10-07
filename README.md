@@ -17,6 +17,7 @@ cp -ap THIS_PROJECT/.gitignore .
 cp -ap THIS_PROJECT/main.js .
 cp -ap THIS_PROJECT/rollup.config.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
+cp -ap THIS_PROJECT/template-contexts.mjs .
 ```
 
 ## How to build

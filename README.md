@@ -2,6 +2,8 @@
 
 ## Get started
 
+**minimum**
+
 ```bash
 npm install ejs glob rollup
 npm install rollup-plugin-sass rollup-plugin-serve
@@ -19,6 +21,7 @@ cp -ap THIS_PROJECT/main.js .
 cp -ap THIS_PROJECT/rollup.config.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
 cp -ap THIS_PROJECT/template-contexts.mjs .
+cp -ap THIS_PROJECT/template-global.mjs .
 ```
 
 ## How to build

@@ -28,7 +28,10 @@ const plugins = [
   },
   sass({
     output: DIST_DIR + 'css/style.css',
-    options: { outputStyle: 'compressed' },
+    options: {
+      outputStyle: 'compressed',
+      silenceDeprecations: ['legacy-js-api'],
+    },
   }),
 ];
 

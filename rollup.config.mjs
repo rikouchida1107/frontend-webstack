@@ -11,14 +11,20 @@ const plugins = [
   {
     name: 'ejs-compiler',
     version: '1.0.0',
-    buildStart: function () {
+    buildStart: async function () {
+      let envVars = {};
+      if (process.env.ENV !== undefined) {
+        const { vars } = await import('./env.' + process.env.ENV + '.mjs');
+        envVars = vars;
+      }
+
       const templateDir = SOURCE_DIR + 'templates/';
 
       const ejsPaths = glob.sync(templateDir + '**/*.ejs', {
         ignore: templateDir + 'includes/**/*.ejs',
       });
-      ejsPaths.forEach(async (ejsPath) => {
-        await templateCompiler(templateDir, DIST_DIR, ejsPath);
+      ejsPaths.forEach((ejsPath) => {
+        templateCompiler(envVars, templateDir, DIST_DIR, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));

@@ -3,17 +3,12 @@ import ejs from 'ejs';
 import path from 'path';
 import { globalVars, templateContexts } from './template-contexts.mjs';
 
-async function templateCompiler (
+function templateCompiler (
+  /** @type {Object} */ envVars,
   /** @type {string} */ templateDir,
   /** @type {string} */ distDir,
   /** @type {string} */ ejsPath,
 ) {
-  let envVars = {};
-  if (process.env.ENV !== undefined) {
-    const { vars } = await import('./env.' + process.env.ENV + '.mjs');
-    envVars = vars;
-  }
-
   const template = fs.readFileSync(ejsPath, { encoding: 'utf-8' });
   const compiler = ejs.compile(template, { filename: ejsPath, root: templateDir });
 

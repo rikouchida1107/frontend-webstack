@@ -3,7 +3,7 @@ import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
 import { templateCompiler } from './template-compiler.mjs';
-import { globalVars } from './global.mjs';
+import { globalVars } from './template-global.mjs';
 
 const DIST_DIR = 'dist/';
 const SOURCE_DIR = 'src/';

@@ -1,7 +1,13 @@
+<%_
+var pageMeta = {
+    'title': 'TOP',
+    'description': 'THIS IS TOP PAGE'
+};
+_%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%- include('includes/_header', { pageName: 'TOP' }) -%>
+<%- include('includes/_header', { pageMeta: pageMeta }) -%>
 </head>
 <body>
 <h2>INDEX</h2>

@@ -1,7 +1,13 @@
+<%_
+var pageMeta = {
+        'title': 'NEWS',
+        'description': 'THIS IS TOP NEWS PAGE'
+};
+_%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<%- include('../includes/_header', { pageName: 'NEWS' }) -%>
+<%- include('../includes/_header', { pageMeta: pageMeta }) -%>
 </head>
 <body>
 <h2>NEWS</h2>

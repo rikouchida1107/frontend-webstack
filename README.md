@@ -25,8 +25,30 @@ cp -ap THIS_PROJECT/template-contexts.mjs .
 
 ```bash
 rollup --config
-# OR ENV=prod rollup --config # use env
 # OR npm run build
+```
+
+## How to build with ENV
+
+```bash
+touch env.xxx.mjs
+ENV=xxx rollup --config
+```
+
+`env.xxx.mjs`
+```:js
+const vars = {
+  someKey: 'SomeValue',
+};
+
+export {
+  vars,
+}
+```
+
+`some.ejs`
+```ejs
+<%= envVars.someKey %>
 ```
 
 ## How to development

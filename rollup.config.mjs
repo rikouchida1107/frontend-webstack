@@ -2,7 +2,6 @@ import { glob } from 'glob';
 import path from 'path';
 import sass from 'rollup-plugin-sass';
 import serve from 'rollup-plugin-serve';
-import copy from 'rollup-plugin-copy';
 import { templateCompiler } from './template-compiler.mjs';
 
 const DIST_DIR = 'dist/';
@@ -33,13 +32,6 @@ const plugins = [
       outputStyle: 'compressed',
       silenceDeprecations: ['legacy-js-api'],
     },
-  }),
-  copy({
-    targets: [
-      { src: `${SOURCE_DIR}images/**/*`, dest: `${DIST_DIR}images` }
-    ],
-    verbose: true,
-    hook: 'buildEnd'
   }),
 ];
 

@@ -19,10 +19,12 @@ function templateCompiler (
   if (ejsPath in templateContexts && 'pages' in templateContexts[ejsPath]) {
     const pages = templateContexts[ejsPath].pages;
     pages.forEach(page => {
+      const pagePath = distPath.replace(path.basename(distPath), page.slug);
       fs.writeFileSync(
-        distPath.replace(path.basename(distPath), page.slug),
+        pagePath,
         compiler(page.data)
       );
+      info('created ' + pagePath);
     });
 
     return;
@@ -34,6 +36,14 @@ function templateCompiler (
   }
 
   fs.writeFileSync(distPath, compiler(data));
+  info('created ' + distPath);
+}
+
+function info (/** @type {string} */ message) {
+  const magenta = '\u001b[36m';
+  const bold = '\u001b[1m';
+  const reset = '\u001b[0m';
+  console.info(magenta + bold + message + reset);
 }
 
 export {

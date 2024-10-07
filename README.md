@@ -8,7 +8,8 @@ npm install rollup-plugin-sass rollup-plugin-serve
 
 node -v > .node-version
 
-mkdir -p src/{styles,template/includes}
+mkdir -p src/{modules,styles,template/includes}
+touch src/modules/index.js
 touch src/styles/main.scss
 touch src/templates/index.ejs
 touch src/templates/_header.ejs

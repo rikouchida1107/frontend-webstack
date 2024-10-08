@@ -10,7 +10,10 @@ const DIST_DIR = 'dist/';
 const TMP_DIST_DIR = 'node_modules/.frontend-webstack/';
 const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
 const SOURCE_DIR = 'src/';
+
 const ASSETS_ROOT = 'assets/';
+const CSS_ROOT = 'css/';
+const JS_ROOT = 'js/';
 
 const plugins = [
   {
@@ -38,7 +41,7 @@ const plugins = [
     },
   },
   sass({
-    output: OUTPUT_DIR + 'css/style.css',
+    output: OUTPUT_DIR + CSS_ROOT + 'style.css',
     options: {
       outputStyle: 'compressed',
       silenceDeprecations: ['legacy-js-api'],
@@ -89,7 +92,7 @@ export default {
   context: 'window',
   output: [
     {
-      file: OUTPUT_DIR + 'js/index.js',
+      file: OUTPUT_DIR + JS_ROOT + 'index.js',
       format: 'esm',
     },
   ],

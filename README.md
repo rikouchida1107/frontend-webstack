@@ -38,6 +38,7 @@ cp -ap THIS_PROJECT/template-global.mjs .
 | `src/modules/`                     | JavaScript モジュール（ライブラリ） |              |
 | `src/styes/`                       | SCSS ファイル               |              |
 | `src/templates/`                   | EJS ファイル                |              |
+| `src/templates/includes/`          | EJS インクルードファイル          |              |
 
 ### Files
 

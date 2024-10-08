@@ -24,6 +24,8 @@ cp -ap THIS_PROJECT/rollup.config.mjs .
 cp -ap THIS_PROJECT/template-compiler.mjs .
 cp -ap THIS_PROJECT/template-contexts.mjs .
 cp -ap THIS_PROJECT/template-global.mjs .
+# cp -ap THIS_PROJECT/env.prod.mjs .
+# cp -ap THIS_PROJECT/eslint.config.mjs .
 ```
 
 ### Directory structure

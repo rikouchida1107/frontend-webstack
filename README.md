@@ -27,17 +27,17 @@ cp -ap THIS_PROJECT/template-global.mjs .
 
 ### Directory structure
 
-| ディレクトリ                             | 用途                      | 定数                    |
-|------------------------------------|-------------------------|-----------------------|
-| `dist/`                            | ビルド後のファイル               | DIST_DIR              |
-| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | DIST_DIR, ASSETS_ROOT |
-| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | DIST_DIR, CSS_ROOT    |
-| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | DIST_DIR, JS_ROOT     |
-| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | TMP_DIST_DIR          |
-| `src/`                             | ソースファイル                 |                       |
-| `src/modules/`                     | JavaScript モジュール（ライブラリ） |                       |
-| `src/styes/`                       | SCSS ファイル               |                       |
-| `src/templates/`                   | EJS ファイル                |                       |
+| ディレクトリ                             | 用途                      | 定数           |
+|------------------------------------|-------------------------|--------------|
+| `dist/`                            | ビルド後のファイル               | DIST_DIR     |
+| `dist/assets/`                     | 静的ファイル（画像,PDF,SVG）を格納   | ASSETS_ROOT  |
+| `dist/css/style.css`               | SCSS ビルド後の CSS ファイル     | CSS_ROOT     |
+| `dist/js/index.js`                 | ビルド後の JavaScript ファイル   | JS_ROOT      |
+| `node_modules/.frontend-webstack/` | 監視モードで起動したときの一時ファイル     | TMP_DIST_DIR |
+| `src/`                             | ソースファイル                 |              |
+| `src/modules/`                     | JavaScript モジュール（ライブラリ） |              |
+| `src/styes/`                       | SCSS ファイル               |              |
+| `src/templates/`                   | EJS ファイル                |              |
 
 ### Files
 

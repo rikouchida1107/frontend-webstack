@@ -62,6 +62,9 @@ export {
 ## How to development
 
 ```bash
-rollup --config --watch # default port 3000
+rollup --config --watch
 # npm run watch
 ```
+
+* `dist/` に出力は行いません。
+* `node_modules/.frontend-webstack/` に一時ファイルを出力します。

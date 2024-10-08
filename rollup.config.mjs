@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { glob } from 'glob';
 import path from 'path';
 import sass from 'rollup-plugin-sass';
@@ -6,7 +7,10 @@ import { templateCompiler } from './template-compiler.mjs';
 import { globalVars } from './template-global.mjs';
 
 const DIST_DIR = 'dist/';
+const TMP_DIST_DIR = 'node_modules/.frontend-webstack/';
+const OUTPUT_DIR = process.env.ROLLUP_WATCH ? TMP_DIST_DIR : DIST_DIR;
 const SOURCE_DIR = 'src/';
+const ASSETS_ROOT = 'assets/';
 
 const plugins = [
   {
@@ -25,7 +29,7 @@ const plugins = [
         ignore: templateDir + 'includes/**/*.ejs',
       });
       ejsPaths.forEach((ejsPath) => {
-        templateCompiler(envVars, globalVars, templateDir, DIST_DIR, ejsPath);
+        templateCompiler(envVars, globalVars, templateDir, OUTPUT_DIR, ejsPath);
 
         if (process.env.ROLLUP_WATCH) {
           this.addWatchFile(path.resolve('./', ejsPath));
@@ -34,7 +38,7 @@ const plugins = [
     },
   },
   sass({
-    output: DIST_DIR + 'css/style.css',
+    output: OUTPUT_DIR + 'css/style.css',
     options: {
       outputStyle: 'compressed',
       silenceDeprecations: ['legacy-js-api'],
@@ -57,7 +61,7 @@ if (process.env.ROLLUP_WATCH) {
   plugins.push([
     serve({
       open: true,
-      contentBase: DIST_DIR,
+      contentBase: OUTPUT_DIR,
       port: process.env.PORT ?? 3000,
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -73,6 +77,11 @@ if (process.env.ROLLUP_WATCH) {
       },
     }),
   ]);
+
+  if (! fs.existsSync(TMP_DIST_DIR)) {
+    fs.mkdirSync(TMP_DIST_DIR, { recursive: true });
+    fs.symlinkSync(path.resolve(DIST_DIR + ASSETS_ROOT), path.resolve(TMP_DIST_DIR + ASSETS_ROOT), 'dir');
+  }
 }
 
 export default {
@@ -80,7 +89,7 @@ export default {
   context: 'window',
   output: [
     {
-      file: DIST_DIR + 'js/index.js',
+      file: OUTPUT_DIR + 'js/index.js',
       format: 'esm',
     },
   ],

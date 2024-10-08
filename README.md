@@ -7,6 +7,7 @@
 ```bash
 npm install ejs glob rollup
 npm install rollup-plugin-sass rollup-plugin-serve
+# npm install eslint --save-dev
 
 node -v > .node-version
 

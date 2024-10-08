@@ -58,8 +58,8 @@ cp -ap THIS_PROJECT/template-global.mjs .
 ## How to build
 
 ```bash
-rollup --config
-# OR npm run build
+npm run build
+# rollup --config
 ```
 
 ## How to build with ENV
@@ -88,8 +88,8 @@ export {
 ## How to development
 
 ```bash
-rollup --config --watch
-# npm run watch
+npm run watch
+# rollup --config --watch
 ```
 
 ※ `dist/` に出力は行いません。

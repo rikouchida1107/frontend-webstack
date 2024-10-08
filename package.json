@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup --config",
     "watch": "rollup --config --watch",
-    "lint": "npx eslint "
+    "lint": "eslint"
   },
   "engines": {
     "node": "22.5.1"
